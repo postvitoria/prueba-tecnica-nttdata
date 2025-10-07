@@ -1,4 +1,4 @@
-# 🚀 Proyecto ETL de Datasets Europeos
+# Proyecto de Datasets Europeos
 
 Este proyecto implementa una pequeña **pipeline de extracción, transformación y carga (ETL)** que obtiene información de datasets públicos desde la API de **[data.europa.eu](https://data.europa.eu/en)**, almacena los datos relevantes en una base de datos local y los expone a través de un backend **Flask**, consumido por una interfaz **React**.
 
