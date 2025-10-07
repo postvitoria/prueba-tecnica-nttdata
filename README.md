@@ -1,10 +1,10 @@
-# 🚀 Proyecto ETL de Datasets Europeos
+# Proyecto de Datasets Europeos
 
 Este proyecto implementa una pequeña **pipeline de extracción, transformación y carga (ETL)** que obtiene información de datasets públicos desde la API de **[data.europa.eu](https://data.europa.eu/en)**, almacena los datos relevantes en una base de datos local y los expone a través de un backend **Flask**, consumido por una interfaz **React**.
 
 ---
 
-## 📁 Organización del repositorio
+## Organización del repositorio
 
 ```
 ├── backend/
@@ -29,9 +29,7 @@ Este proyecto implementa una pequeña **pipeline de extracción, transformación
 
 ---
 
-## ⚙️ Pipeline de extracción y procesamiento
-
-El flujo de datos sigue una estructura ETL clásica:
+## Pipeline de extracción y procesamiento
 
 ```mermaid
 flowchart TD
@@ -44,7 +42,7 @@ flowchart TD
     G -->|"Renderizado de tabla y métricas"| H["Visualización"]
 ```
 
-### 🔍 Detalle de pasos
+### Detalle de pasos
 
 1. **Extracción:**
    Se consultan los 50 primeros *datasets* a través del endpoint `/search/datasets` de la API de *data.europa.eu*.
@@ -71,7 +69,7 @@ flowchart TD
 
 ---
 
-## 🧱 Tecnologías empleadas
+## Tecnologías empleadas
 
 | Componente  | Tecnología         | Descripción                                          |
 | ----------- | ------------------ | ---------------------------------------------------- |
@@ -82,7 +80,7 @@ flowchart TD
 
 ---
 
-## ⚡ Ejecución local (sin Docker)
+## Ejecución local (sin Docker)
 
 ### Backend
 
@@ -100,14 +98,14 @@ npm install
 npm run dev
 ```
 
-El frontend se servirá normalmente en [http://localhost:3000](http://localhost:3000)
+El frontend se servirá en [http://localhost:3000](http://localhost:3000)
 y el backend en [http://localhost:5000](http://localhost:5000).
 
 ---
 
-## 🐳 Ejecución con Docker
+## Ejecución con Docker
 
-### 1️⃣ Construir e iniciar los contenedores
+### 1️ Construir e iniciar los contenedores
 
 Desde la raíz del proyecto:
 
@@ -121,13 +119,13 @@ Esto levantará:
 * **Frontend React** en `http://localhost:3000`
 * (Opcionalmente) una **base de datos SQLite** dentro del contenedor del backend
 
-### 2️⃣ Detener los contenedores
+### 2️ Detener los contenedores
 
 ```bash
 docker compose down
 ```
 
-### 3️⃣ Ver logs en tiempo real
+### 3️ Ver logs en tiempo real
 
 ```bash
 docker compose logs -f
@@ -135,7 +133,7 @@ docker compose logs -f
 
 ---
 
-## 📌 Información adicional
+## Información adicional
 
 * Los datasets se cargan **una sola vez al iniciar el servidor**.
   Si ya existen en la base de datos, no se vuelven a insertar.
