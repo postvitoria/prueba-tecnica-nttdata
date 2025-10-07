@@ -1,4 +1,4 @@
-# Proyecto de Datasets Europeos
+# 🚀 Proyecto ETL de Datasets Europeos
 
 Este proyecto implementa una pequeña **pipeline de extracción, transformación y carga (ETL)** que obtiene información de datasets públicos desde la API de **[data.europa.eu](https://data.europa.eu/en)**, almacena los datos relevantes en una base de datos local y los expone a través de un backend **Flask**, consumido por una interfaz **React**.
 
@@ -18,11 +18,12 @@ Este proyecto implementa una pequeña **pipeline de extracción, transformación
 │   ├── src/
 │   │   ├── App.js              # Página principal de React
 │   │   ├── components/         
-│   │       └── DatasetTable.js # Componente reutilizables
+│   │       └── DatasetTable.js # Componente reutilizable
 │   │   └── services/        
 │   │       └── api.js          # Llamadas al backend
 │   ├── package.json            # Dependencias y scripts de React
 │
+├── docker-compose.yml          # Orquestación de contenedores
 ├── README.md                   # Este documento
 ```
 
@@ -34,13 +35,13 @@ El flujo de datos sigue una estructura ETL clásica:
 
 ```mermaid
 flowchart TD
-    A[API data.europa.eu - Search] -->|Obtener 50 primeros IDs| B[Extracción de IDs]
-    B --> C[API data.europa.eu - Details]
-    C -->|Procesar JSON, extraer campos relevantes| D[Transformación]
-    D -->|Guardar en SQLite (Dataset)| E[Base de datos local]
-    E -->|Flask /datasets| F[Backend API]
-    F -->|Axios Fetch| G[Frontend React]
-    G -->|Renderizado de tabla y métricas| H[Visualización]
+    A["API data.europa.eu - Search"] -->|"Obtener 50 primeros IDs"| B["Extracción de IDs"]
+    B --> C["API data.europa.eu - Details"]
+    C -->|"Procesar JSON, extraer campos relevantes"| D["Transformación"]
+    D -->|"Guardar en SQLite (Dataset)"| E["Base de datos local"]
+    E -->|"Flask /datasets"| F["Backend API"]
+    F -->|"Axios Fetch"| G["Frontend React"]
+    G -->|"Renderizado de tabla y métricas"| H["Visualización"]
 ```
 
 ### 🔍 Detalle de pasos
@@ -81,7 +82,7 @@ flowchart TD
 
 ---
 
-## ⚡ Ejecución local
+## ⚡ Ejecución local (sin Docker)
 
 ### Backend
 
@@ -104,12 +105,42 @@ y el backend en [http://localhost:5000](http://localhost:5000).
 
 ---
 
+## 🐳 Ejecución con Docker
+
+### 1️⃣ Construir e iniciar los contenedores
+
+Desde la raíz del proyecto:
+
+```bash
+docker compose up --build
+```
+
+Esto levantará:
+
+* **Backend Flask** en `http://localhost:5000`
+* **Frontend React** en `http://localhost:3000`
+* (Opcionalmente) una **base de datos SQLite** dentro del contenedor del backend
+
+### 2️⃣ Detener los contenedores
+
+```bash
+docker compose down
+```
+
+### 3️⃣ Ver logs en tiempo real
+
+```bash
+docker compose logs -f
+```
+
+---
+
 ## 📌 Información adicional
 
-* Los datasets solo se cargan **una vez al iniciar el servidor**.
-  Si ya existen en la base, no se vuelven a insertar.
-* Se validan los campos obligatorios para evitar registros incompletos o duplicados.
-* El diseño del pipeline está desacoplado del backend, facilitando su extensión a otros orígenes de datos o bases de datos relacionales.
+* Los datasets se cargan **una sola vez al iniciar el servidor**.
+  Si ya existen en la base de datos, no se vuelven a insertar.
+* El diseño del pipeline está desacoplado del backend, facilitando su extensión a otros orígenes de datos o bases de datos.
+* Se incluye soporte opcional para **Docker** mediante `docker-compose` para ejecutar todo el stack fácilmente.
 
 ---
 
