@@ -1,7 +1,6 @@
 import requests
 
 SEARCH_URL = "https://data.europa.eu/api/hub/search/datasets/"
-DETAIL_URL_BASE = "https://data.europa.eu/api/hub/search/datasets/"
 
 def fetch_dataset_ids(limit=50):
     params = {
@@ -20,7 +19,7 @@ def fetch_dataset_ids(limit=50):
 
 
 def fetch_dataset_details(dataset_id):
-    response = requests.get(f"{DETAIL_URL_BASE}{dataset_id}")
+    response = requests.get(f"{SEARCH_URL}{dataset_id}")
     if response.status_code != 200:
         print(f"Error obteniendo detalles de {dataset_id}: {response.status_code}")
         return None
