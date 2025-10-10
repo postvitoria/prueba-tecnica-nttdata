@@ -46,16 +46,3 @@ def fetch_dataset_details(dataset_id):
         "publisher_name": publisher_name,
         "scoring": scoring
     }
-
-def extract_title(title_data):
-    if isinstance(title_data, dict):
-        return title_data.get("es") or title_data.get("en") or next(iter(title_data.values()), "")
-    elif isinstance(title_data, str):
-        return title_data
-    return ""
-
-
-def extract_scoring(quality_meas):
-    if isinstance(quality_meas, dict):
-        return quality_meas.get("scoring")
-    return None
